@@ -54,9 +54,6 @@ class _FormWidgetState extends State<FormWidget> {
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold)),
                         controller: _titleController,
-                        onChanged: (value) {
-                          // Handle title change
-                        },
                       ),
                       const SizedBox(height: 16),
                       TextField(
@@ -67,9 +64,6 @@ class _FormWidgetState extends State<FormWidget> {
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold)),
                         controller: _descriptionController,
-                        onChanged: (value) {
-                          // Handle description change
-                        },
                       ),
                       const SizedBox(height: 16),
                       TextField(
@@ -81,9 +75,6 @@ class _FormWidgetState extends State<FormWidget> {
                                 fontWeight: FontWeight.bold)),
                         controller: _amountController,
                         keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          // Handle amount change
-                        },
                       ),
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.0),
