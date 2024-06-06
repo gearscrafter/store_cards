@@ -17,7 +17,7 @@ Para comenzar con Store Cards, sigue estos pasos:
 1. **Clona el repositorio:**
 
    ```
-   git clone <repository_url>
+   git clone [<repository_url>](https://github.com/gearscrafter/store_cards.git)
    ```
 
 2. **Navega al directorio del proyecto:**
