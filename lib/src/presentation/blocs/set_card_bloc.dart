@@ -1,4 +1,3 @@
-import 'dart:async';
 import '../../application/usecases/set_card_usecase.dart';
 import '../../domain/entities/card_entity.dart';
 

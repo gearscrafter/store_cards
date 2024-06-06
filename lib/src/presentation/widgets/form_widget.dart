@@ -48,7 +48,7 @@ class _FormWidgetState extends State<FormWidget> {
                     children: [
                       TextField(
                         decoration: const InputDecoration(
-                            labelText: 'Title',
+                            labelText: 'Titulo',
                             labelStyle: TextStyle(
                                 fontSize: 24,
                                 color: Colors.grey,
@@ -58,7 +58,7 @@ class _FormWidgetState extends State<FormWidget> {
                       const SizedBox(height: 16),
                       TextField(
                         decoration: const InputDecoration(
-                            labelText: 'Description',
+                            labelText: 'Descripción',
                             labelStyle: TextStyle(
                                 fontSize: 24,
                                 color: Colors.grey,
@@ -79,7 +79,7 @@ class _FormWidgetState extends State<FormWidget> {
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 16.0),
                         child: Text(
-                          'Choose your card colour',
+                          'Elije el color de tu tarjeta',
                           style: TextStyle(
                               fontSize: 24,
                               color: Colors.grey,
@@ -154,11 +154,12 @@ class _FormWidgetState extends State<FormWidget> {
                       ),
                     ),
                     child: const Text(
-                      'SAVE MY CARD',
+                      'GUARDAR MI TARJETA',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Color(0xff77a3de),
                           fontWeight: FontWeight.bold,
-                          fontSize: 32),
+                          fontSize: 28),
                     )),
               ),
             ],

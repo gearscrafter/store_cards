@@ -3,8 +3,8 @@ import '../../infraestructure/models/card_model.dart';
 final List<CardModel> cards = [
   CardModel(
       id: '0',
-      title: 'Sainsbury\'s',
-      description: 'Charity Card',
+      title: 'La piedad',
+      description: 'Tarjeta de caridad',
       barcode:
           'https://barcode.tec-it.com/barcode.ashx?data=ABC-abc-1234&code=Code128&translate-esc=on',
       imageUrl: 'https://picsum.photos/200/300',
@@ -12,8 +12,8 @@ final List<CardModel> cards = [
       amount: 2.0),
   CardModel(
       id: '1',
-      title: 'Another Shop',
-      description: 'Bank Card',
+      title: 'BancoTienda',
+      description: 'Tarjeta de banco',
       barcode:
           'https://barcode.tec-it.com/barcode.ashx?data=ABC-abc-1234&code=Code128&translate-esc=on',
       imageUrl: 'https://picsum.photos/200/300',
@@ -21,8 +21,8 @@ final List<CardModel> cards = [
       amount: 7.5),
   CardModel(
       id: '2',
-      title: 'Coffee Shop',
-      description: 'Mocka Card',
+      title: 'Cafetería',
+      description: 'Mocka',
       barcode:
           'https://barcode.tec-it.com/barcode.ashx?data=ABC-abc-1234&code=Code128&translate-esc=on',
       imageUrl: 'https://picsum.photos/200/300',

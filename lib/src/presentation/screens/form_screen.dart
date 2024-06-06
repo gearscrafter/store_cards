@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:store_cards/src/core/mixins/dialogs_mixin.dart';
 import 'package:store_cards/src/core/utils/form_colors.dart';
 import 'package:store_cards/src/presentation/blocs/add_card_bloc.dart';
 import 'package:store_cards/src/presentation/blocs/set_card_bloc.dart';
@@ -19,7 +20,8 @@ class FormScreen extends StatefulWidget {
   State<FormScreen> createState() => _FormScreenState();
 }
 
-class _FormScreenState extends State<FormScreen> with TickerProviderStateMixin {
+class _FormScreenState extends State<FormScreen>
+    with TickerProviderStateMixin, DialogsMixin {
   late SetCardBloc _setCardBloc;
   late AddCardBloc _addCardBloc;
 
@@ -39,7 +41,7 @@ class _FormScreenState extends State<FormScreen> with TickerProviderStateMixin {
     _addCardBloc = AddCardBloc(addCardUseCase);
 
     _controller = AnimationController(
-        duration: const Duration(milliseconds: 1500), vsync: this);
+        duration: const Duration(milliseconds: 400), vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _controller,
@@ -48,7 +50,7 @@ class _FormScreenState extends State<FormScreen> with TickerProviderStateMixin {
     );
 
     _rotationController = AnimationController(
-        duration: const Duration(milliseconds: 1200), vsync: this);
+        duration: const Duration(milliseconds: 400), vsync: this);
     _rotationAnimation =
         Tween<double>(begin: (1 / 2) * pi, end: 2 * pi).animate(
       CurvedAnimation(
@@ -108,29 +110,49 @@ class _FormScreenState extends State<FormScreen> with TickerProviderStateMixin {
                               animation: animationValue,
                               onPressed: (String title, String description,
                                   double amount, int colorIndex) {
-                                if (widget.isFromDetailsScreen ?? false) {
-                                  _setCardBloc.setCard(CardEntity(
-                                      id: widget.card?.id ?? '-1',
-                                      title: title,
-                                      description: description,
-                                      imageUrl: 'https://picsum.photos/200/300',
-                                      barcode:
-                                          'https://barcode.tec-it.com/barcode.ashx?data=ABC-abc-1234&code=Code128&translate-esc=on',
-                                      color: getColorHexForIndex(colorIndex),
-                                      amount: amount));
+                                if (title.isEmpty ||
+                                    description.isEmpty ||
+                                    amount <= 0 ||
+                                    colorIndex == -1) {
+                                  null;
                                 } else {
-                                  _addCardBloc.addCard(CardEntity(
-                                      title: title,
-                                      description: description,
-                                      imageUrl: 'https://picsum.photos/200/300',
-                                      barcode:
-                                          'https://barcode.tec-it.com/barcode.ashx?data=ABC-abc-1234&code=Code128&translate-esc=on',
-                                      color: getColorHexForIndex(colorIndex),
-                                      amount: amount));
-                                }
+                                  alertDialog(
+                                      context: context,
+                                      description: "¿Desea guardar la tarjeta?",
+                                      callback: () {
+                                        if (widget.isFromDetailsScreen ??
+                                            false) {
+                                          _setCardBloc.setCard(CardEntity(
+                                              id: widget.card?.id ?? '-1',
+                                              title: title,
+                                              description: description,
+                                              imageUrl:
+                                                  'https://picsum.photos/200/300',
+                                              barcode:
+                                                  'https://barcode.tec-it.com/barcode.ashx?data=ABC-abc-1234&code=Code128&translate-esc=on',
+                                              color: getColorHexForIndex(
+                                                  colorIndex),
+                                              amount: amount));
+                                        } else {
+                                          _addCardBloc.addCard(CardEntity(
+                                              title: title,
+                                              description: description,
+                                              imageUrl:
+                                                  'https://picsum.photos/200/300',
+                                              barcode:
+                                                  'https://barcode.tec-it.com/barcode.ashx?data=ABC-abc-1234&code=Code128&translate-esc=on',
+                                              color: getColorHexForIndex(
+                                                  colorIndex),
+                                              amount: amount));
+                                        }
 
-                                Navigator.pushNamedAndRemoveUntil(context,
-                                    AppRoutes.home, (route) => route.isFirst);
+                                        Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            AppRoutes.home,
+                                            (route) => route.isFirst);
+                                      },
+                                      title: "Guardar tarjeta");
+                                }
                               },
                             )),
                       );

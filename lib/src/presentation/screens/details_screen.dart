@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_cards/src/core/mixins/dialogs_mixin.dart';
 import 'dart:math';
 import 'package:store_cards/src/domain/entities/card_entity.dart';
 import 'package:store_cards/src/presentation/blocs/delete_card_bloc.dart';
@@ -17,7 +18,7 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, DialogsMixin {
   late DeleteCardBloc _deleteCardBloc;
 
   late AnimationController _controller;
@@ -32,7 +33,7 @@ class _DetailsScreenState extends State<DetailsScreen>
     _deleteCardBloc = DeleteCardBloc(deleteCardUseCase);
 
     _controller = AnimationController(
-        duration: const Duration(milliseconds: 1500), vsync: this);
+        duration: const Duration(milliseconds: 400), vsync: this);
     _animation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _controller,
@@ -41,7 +42,7 @@ class _DetailsScreenState extends State<DetailsScreen>
     );
 
     _rotationController = AnimationController(
-        duration: const Duration(milliseconds: 1200), vsync: this);
+        duration: const Duration(milliseconds: 400), vsync: this);
     _rotationAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(
         parent: _rotationController,
@@ -132,10 +133,16 @@ class _DetailsScreenState extends State<DetailsScreen>
                           padding: const EdgeInsets.all(20.0),
                           child: IconButton(
                               onPressed: () {
-                                _deleteCardBloc
-                                    .deleteCard(widget.card.id ?? "");
-                                Navigator.pushNamedAndRemoveUntil(
-                                    context, AppRoutes.home, (route) => false);
+                                alertDialog(
+                                    context: context,
+                                    description: "¿Desea eliminar la tarjeta?",
+                                    callback: () {
+                                      _deleteCardBloc
+                                          .deleteCard(widget.card.id ?? "");
+                                      Navigator.pushNamedAndRemoveUntil(context,
+                                          AppRoutes.home, (route) => false);
+                                    },
+                                    title: "Eliminar tarjeta");
                               },
                               icon: const Icon(
                                 Icons.delete,
