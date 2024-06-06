@@ -68,7 +68,7 @@ class _FormWidgetState extends State<FormWidget> {
                       const SizedBox(height: 16),
                       TextField(
                         decoration: const InputDecoration(
-                            labelText: 'Amount',
+                            labelText: 'Cantidad',
                             labelStyle: TextStyle(
                                 fontSize: 24,
                                 color: Colors.grey,
